@@ -1,6 +1,6 @@
 using System;
 using System.Net.Http.Headers;
-class Fraction
+public class Fraction
 {
     private int _top;
     private int _bottom;
