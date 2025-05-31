@@ -1,10 +1,12 @@
 using System.Data.SqlTypes;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 public class GoalManager
 {
     private List<Goal> _goals;
     private int _score;
+    private string _lastEternalGoal;
 
     public GoalManager()
     {
@@ -79,7 +81,16 @@ public class GoalManager
     }
     public void DisplayPlayerInfo()
     {
-        Console.WriteLine($"\nYou have {_score} points.\n");
+        Console.WriteLine($"\nYou have {_score} points.");
+        if (_lastEternalGoal == null || _lastEternalGoal == "")
+        {
+            Console.WriteLine("You haven't worked on an Eternal Goal\n");
+        }
+        else
+        {
+            DateTime date = DateTime.Today;
+            Console.WriteLine($"The last time you worked on an Eternal Goal was {(date - DateTime.Parse(_lastEternalGoal)).Days} days ago\n");
+        }
     }
     public void ListGoalNames()
     {
@@ -136,6 +147,11 @@ public class GoalManager
         Console.WriteLine("Which goal did you accomplish? ");
         int goalOption = int.Parse(Console.ReadLine());
         _goals[goalOption - 1].RecordEvent();
+        if (_goals[goalOption - 1] is EternalGoal)
+        {
+            DateTime lastTime = DateTime.Today;
+            _lastEternalGoal = lastTime.ToString();
+        }
         Console.WriteLine($"Congratulations! You have earned {_goals[goalOption - 1].GetPoints()} points!");
         if (_goals[goalOption - 1].IsComplete() && _goals[goalOption - 1] is CheckListGoal)
         {
@@ -154,6 +170,7 @@ public class GoalManager
         {
             _score += _goals[goalOption - 1].GetPoints();
         }
+
         Console.WriteLine($"You now have {_score} points");
     }
     public void SaveGoals()
@@ -163,6 +180,7 @@ public class GoalManager
         using (StreamWriter outputfile = new StreamWriter(filenameSave))
         {
             outputfile.WriteLine(_score);
+            outputfile.WriteLine(_lastEternalGoal);
             foreach (Goal g in _goals)
             {
 
@@ -176,6 +194,8 @@ public class GoalManager
         string filenameLoad = Console.ReadLine();
         string[] lines = System.IO.File.ReadAllLines(filenameLoad);
         _score = int.Parse(lines[0]);
+        _lastEternalGoal = lines[1];
+        lines = lines.Skip(1).ToArray();
         lines = lines.Skip(1).ToArray();
         foreach (string line in lines)
         {
