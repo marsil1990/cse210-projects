@@ -1,7 +1,5 @@
 using System;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
+
 
 public class Scripture
 {
@@ -31,10 +29,10 @@ public class Scripture
         {
             foreach (Word w in _words)
             {
-                if (!w.IsHidden())
-                {
-                    nothiddenWords.Add(w);
-                    randomIndex.Add(index);
+                if (!w.IsHidden())         //   0       1        2       3    
+                {                          // dadsad asdadasd mother dsdsd
+                    nothiddenWords.Add(w); // 
+                    randomIndex.Add(index); // randomIndex.Add(0) randomIndex.Add(1)  randomIndex.Add(2) randomIndex.Add(3)    
                     index++;
                 }
             }
@@ -44,9 +42,9 @@ public class Scripture
             {
                 if (!this.IsCompleteHidden())
                 {
-                    n = random.Next(0, randomIndex.Count());
-                    nothiddenWords[randomIndex[n]].Hide();
-                    randomIndex.Remove(n);
+                    n = random.Next(0, randomIndex.Count()); //random.Next(0, 4) 0, 1, 2, 3 = 2
+                    nothiddenWords[randomIndex[n]].Hide(); // nothiddenWord[2].hidden() mother -> true 
+                    randomIndex.Remove(n); // 0  1  3
                 }
                 else
                 {

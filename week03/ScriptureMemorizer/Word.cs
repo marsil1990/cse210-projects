@@ -32,7 +32,7 @@ public class Word
             char s = _text[_text.Length - 1];
             if (s == '.' || s == ',' || s == '?' || s == '!')
             {
-                text = new string('_', _text.Length - 1);
+                text = new string('_', _text.Length - 1);  
                 return text + s;
             }
             else
@@ -44,7 +44,7 @@ public class Word
         }
         else
         {
-            return _text;
+            return _text; 
         }
 
     }
