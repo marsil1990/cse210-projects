@@ -52,7 +52,6 @@ public class ReflectingActivity : Activity
         {
             return "There are no more questions";
         }
-
     }
 
     public void DisplayPrompt()
