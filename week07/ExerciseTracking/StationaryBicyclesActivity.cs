@@ -14,7 +14,7 @@ public class StationaryBicyclesActivity : Activity
     }
     public override double GetDistance()
     {
-        return _speed * GetLength();
+        return _speed * GetLength() / 60;
     }
     public override double GetPace()
     {

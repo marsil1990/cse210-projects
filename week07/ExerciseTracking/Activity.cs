@@ -19,6 +19,6 @@ public abstract class Activity
     public abstract double GetPace();
     public string GetSummary()
     {
-        return $"{_date: dd MM yyyy} {this.GetType().Name} ({_length} min): Distance {GetDistance():0.0}, Speed: {GetSpeed():0.0} km/h, Pace: {GetPace():0.0} min/km";
+        return $"{_date: dd MM yyyy} {this.GetType().Name} ({_length} min): Distance {GetDistance():0.00}, Speed: {GetSpeed():0.00} km/h, Pace: {GetPace():0.00} min/km";
     }
 }
